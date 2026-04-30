@@ -1,14 +1,18 @@
-import { Button, Card, Chip, Separator } from '@heroui/react';
+import { Button, Card, Chip } from '@heroui/react';
 import Image from 'next/image';
-import Link from 'next/link';
-
-import { BiDownload } from 'react-icons/bi';
 import { FaHeart } from 'react-icons/fa';
 
-const PhotoCard = ({ photo}) => {
+const PhotoDetailsPage = async ({params}) => {
+const {id} = await params;
+const res = await fetch('https://pixgen-tan.vercel.app/data.json')
+    const photos  = await res.json()
+
+    const photo = photos.find(p =>p.id == id)
     return (
-        <div>
-              <Card className="border rounded-xl">
+        <div className=' my-10'>
+            
+
+<Card className="border rounded-xl">
             <div className="relative w-full aspect-square">
             <Image
                 src={photo.imageUrl}
@@ -22,29 +26,31 @@ const PhotoCard = ({ photo}) => {
             </div>
 
             <div>
-                <h2 className="font-medium">{photo.title}</h2>
+                <h2 className="font-medium">{photo.model}</h2>
             </div>
 
            <div className="flex gap-5">
              <div className="flex items-center gap-2">
-                <p><FaHeart /></p>
-                <p>{photo.likes}</p>
+                
+                <p>{photo.category}</p>
             </div>
 
-            <Separator orientation="vertical"/>
 
 
                <div className="flex items-center gap-2">
-                <p><BiDownload /></p>
-                <p>{photo.downloads}</p>
+                <p>{photo.resolution}</p>
             </div>
            </div>
 
-     <Link href={`/all-photos/${photo.id}`}>      <Button variant="outline" className={'w-full'}>View</Button></Link>
-            
+     
         </Card>
+
+
+
+
+
         </div>
     );
 };
 
-export default PhotoCard;
+export default PhotoDetailsPage;
