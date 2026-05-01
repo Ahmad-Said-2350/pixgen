@@ -2,6 +2,7 @@ import Footer from "@/componets/Footer";
 import "./globals.css";
 import Navbar from "@/componets/Navbar";
 import { Urbanist } from 'next/font/google';
+ import { ToastContainer} from 'react-toastify';
 
 
 const urbanistFont = Urbanist({
@@ -26,6 +27,8 @@ export default function RootLayout({ children }) {
         <Navbar></Navbar>
        <main className=" max-w-7xl mx-auto"> {children}</main>
         <Footer></Footer>
+        <ToastContainer />
+
         </body>
     </html>
   );
